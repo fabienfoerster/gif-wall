@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="fullscreen-bg">
+    <video id="gif-video" autoplay loop muted class="fullscreen-bg__video"></video>
+  </div>
+  <script>
+  var video = document.getElementById('gif-video');
+  var source = document.createElement('source');
+
+  var myDataRef = new Firebase('https://gif-wall.firebaseio.com/gif_list');
+
+  source.setAttribute('src', 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4');
+  video.appendChild(source);
+  video.play();
+
+  myDataRef.on('child_added', function(snapshot) {
+    video.pause();
+    var message = snapshot.val();
+    source.setAttribute('src',message)
+    video.load();
+    video.play();
+    console.log(message)
+  });
+
+  </script>
+</body>
+</html>
