@@ -1,6 +1,6 @@
 {
   "name": "Gif wall twitter crawler",
-  "description": "This app read incoming tweets and extract gif"
+  "description": "This app read incoming tweets and extract gif",
   "keywords": [
     "twitter",
     "tweet",
