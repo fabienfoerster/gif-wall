@@ -1,1 +1,1 @@
-web: gifwall
+worker: gifwall
