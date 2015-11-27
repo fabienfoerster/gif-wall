@@ -1,0 +1,15 @@
+{
+  "name": "Gif wall twitter crawler",
+  "description": "This app read incoming tweets and extract gif"
+  "keywords": [
+    "twitter",
+    "tweet",
+    "gif"
+  ],
+  "repository": "https://github.com/fabienfoerster/gif-wall",
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-go"
+    }
+  ]
+}
