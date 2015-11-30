@@ -1,22 +1,45 @@
-package gifwall
+package main
 
 import (
 	"log"
 	"net/url"
+	"os"
 
 	"github.com/ChimeraCoder/anaconda"
 	"github.com/CloudCom/firego"
 )
 
+var twitterAPIKey, twitterAPISecret, twitterAccessToken, twitterAccessTokenSecret string
+
+func loadTwitterAPIKeys() {
+	twitterAPIKey = os.Getenv("TWITTER_API_KEY")
+	if twitterAPIKey == "" {
+		log.Fatal("TWITTER_API_KEY not found")
+	}
+	twitterAPISecret = os.Getenv("TWITTER_API_SECRET")
+	if twitterAPIKey == "" {
+		log.Fatal("TWITTER_API_SECRET not found")
+	}
+	twitterAccessToken = os.Getenv("TWITTER_ACCESS_TOKEN")
+	if twitterAPIKey == "" {
+		log.Fatal("TWITTER_ACCESS_TOKEN not found")
+	}
+	twitterAccessTokenSecret = os.Getenv("TWITTER_ACCESS_TOKEN_SECRET")
+	if twitterAPIKey == "" {
+		log.Fatal("TWITTER_ACCESS_TOKEN_SECRET not found")
+	}
+}
+
 func main() {
+	loadTwitterAPIKeys()
 
 	//set up firebase connection
 	f := firego.New("https://gif-wall.firebaseio.com/gif_list")
 	log.Println("Connected to Firebase ...")
 	//set up twitter api
-	anaconda.SetConsumerKey("2vxn8zOFZuBPCep3oejC33SsX")
-	anaconda.SetConsumerSecret("8mjb3gIK7agiZYvEiQQHFjxDbqMMzqCzrbNXJg0aDkTyHt3NIk")
-	api := anaconda.NewTwitterApi("1620076356-iQfWV1al7DCa3XVbfl3mLsmAS2GgCEB22WFtGgu", "lbhjpDSZ7Qx0fcG75P9YMC7sLB0UTlnSF8OAminwOyRZU")
+	anaconda.SetConsumerKey(twitterAPIKey)
+	anaconda.SetConsumerSecret(twitterAPISecret)
+	api := anaconda.NewTwitterApi(twitterAccessToken, twitterAccessTokenSecret)
 	log.Println("Connected to Twitter Stream API ....")
 
 	v := url.Values{}
@@ -28,7 +51,6 @@ func main() {
 		log.Printf("New tweet : https://twitter.com/%s/status/%s", tweet.User.ScreenName, tweet.IdStr)
 		if url := extractGIFFromMediaTwitter(tweet); url != "" {
 			saveToFirese(f, url)
-			continue
 		}
 		/*if url := extractGIFFromLinkTwitter(tweet); url != "" {
 			saveToFirese(f, url)

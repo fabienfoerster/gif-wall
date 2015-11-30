@@ -1,4 +1,4 @@
-package gifwall
+package main
 
 import (
 	"log"
