@@ -1,4 +1,4 @@
-# gif-wall [![Build Status](https://drone.io/github.com/fabienfoerster/gif-wall/status.png)](https://drone.io/github.com/fabienfoerster/gif-wall/latest)
+# gif-wall 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
