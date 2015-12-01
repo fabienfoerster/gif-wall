@@ -34,6 +34,7 @@ heroku config:set TWITTER_API_KEY=XXX
 heroku config:set TWITTER_API_SECRET=XXX
 heroku config:set TWITTER_ACCESS_TOKEN=XXX
 heroku config:set TWITTER_ACCESS_TOKEN_SECRET=XXX
+heroku config:set TWITTER_STREAM_FOLLOW=personid1,personid2,...
 ```
 
 ## To deploy to heroku
