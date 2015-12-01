@@ -9,9 +9,9 @@ import (
 	"github.com/CloudCom/firego"
 )
 
-var twitterAPIKey, twitterAPISecret, twitterAccessToken, twitterAccessTokenSecret string
+var twitterAPIKey, twitterAPISecret, twitterAccessToken, twitterAccessTokenSecret, twitterStreamFollow string
 
-func loadTwitterAPIKeys() {
+func loadEnvironmentVariables() {
 	twitterAPIKey = os.Getenv("TWITTER_API_KEY")
 	if twitterAPIKey == "" {
 		log.Fatal("TWITTER_API_KEY not found")
@@ -28,10 +28,14 @@ func loadTwitterAPIKeys() {
 	if twitterAPIKey == "" {
 		log.Fatal("TWITTER_ACCESS_TOKEN_SECRET not found")
 	}
+	twitterStreamFollow = os.Getenv("TWITTER_STREAM_FOLLOW")
+	if twitterStreamFollow == "" {
+		log.Fatal("TWITTER_STREAM_FOLLOW not found")
+	}
 }
 
 func main() {
-	loadTwitterAPIKeys()
+	loadEnvironmentVariables()
 
 	//set up firebase connection
 	f := firego.New("https://gif-wall.firebaseio.com/gif_list")
@@ -43,7 +47,7 @@ func main() {
 	log.Println("Connected to Twitter Stream API ....")
 
 	v := url.Values{}
-	v.Set("follow", "168749152")
+	v.Set("follow", twitterStreamFollow)
 	stream := api.PublicStreamFilter(v)
 	log.Println("Stream initialized ....")
 	for t := range stream.C {
