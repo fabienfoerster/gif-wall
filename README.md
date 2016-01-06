@@ -28,7 +28,7 @@ go install
 $GOPATH/bin/gif-wall
 ```
 ##Environment variables
-The app use the twitter API so you'll need to set 4 environment variables
+The app use the twitter API so you'll need to set 5 environment variables
 ```
 heroku config:set TWITTER_API_KEY=XXX
 heroku config:set TWITTER_API_SECRET=XXX
