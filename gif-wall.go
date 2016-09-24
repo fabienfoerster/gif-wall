@@ -9,33 +9,27 @@ import (
 	"github.com/CloudCom/firego"
 )
 
-var twitterAPIKey, twitterAPISecret, twitterAccessToken, twitterAccessTokenSecret, twitterStreamFollow string
-
-func loadEnvironmentVariables() {
-	twitterAPIKey = os.Getenv("TWITTER_API_KEY")
+func main() {
+	twitterAPIKey := os.Getenv("TWITTER_API_KEY")
 	if twitterAPIKey == "" {
 		log.Fatal("TWITTER_API_KEY not found")
 	}
-	twitterAPISecret = os.Getenv("TWITTER_API_SECRET")
+	twitterAPISecret := os.Getenv("TWITTER_API_SECRET")
 	if twitterAPIKey == "" {
 		log.Fatal("TWITTER_API_SECRET not found")
 	}
-	twitterAccessToken = os.Getenv("TWITTER_ACCESS_TOKEN")
+	twitterAccessToken := os.Getenv("TWITTER_ACCESS_TOKEN")
 	if twitterAPIKey == "" {
 		log.Fatal("TWITTER_ACCESS_TOKEN not found")
 	}
-	twitterAccessTokenSecret = os.Getenv("TWITTER_ACCESS_TOKEN_SECRET")
+	twitterAccessTokenSecret := os.Getenv("TWITTER_ACCESS_TOKEN_SECRET")
 	if twitterAPIKey == "" {
 		log.Fatal("TWITTER_ACCESS_TOKEN_SECRET not found")
 	}
-	twitterStreamFollow = os.Getenv("TWITTER_STREAM_FOLLOW")
+	twitterStreamFollow := os.Getenv("TWITTER_STREAM_FOLLOW")
 	if twitterStreamFollow == "" {
 		log.Fatal("TWITTER_STREAM_FOLLOW not found")
 	}
-}
-
-func main() {
-	loadEnvironmentVariables()
 
 	//set up firebase connection
 	f := firego.New("https://gif-wall.firebaseio.com/gif_list")
