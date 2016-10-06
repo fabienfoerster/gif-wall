@@ -45,10 +45,10 @@ func main() {
 	stream := api.PublicStreamFilter(v)
 	log.Println("Stream initialized ....")
 	for t := range stream.C {
-		switch t := t.(type) {
+		switch tw := t.(type) {
 		case anaconda.Tweet:
-			log.Printf("New tweet : https://twitter.com/%s/status/%s", t.User.ScreenName, t.IdStr)
-			if url := extractGIFFromMediaTwitter(t); url != "" {
+			log.Printf("New tweet : https://twitter.com/%s/status/%s", tw.User.ScreenName, tw.IdStr)
+			if url := extractGIFFromMediaTwitter(tw); url != "" {
 				saveToFirese(f, url)
 			}
 			/*if url := extractGIFFromLinkTwitter(tweet); url != "" {
