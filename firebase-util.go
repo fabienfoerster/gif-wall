@@ -6,15 +6,19 @@ import (
 	"github.com/CloudCom/firego"
 )
 
-func saveToFirese(f *firego.Firebase, url string) {
-	pushedFirego, err := f.Push(url)
+func PushToFirebase(f *firego.Firebase, gif interface{}) {
+	_, err := f.Push(gif)
 	if err != nil {
-		log.Fatal(err)
+		log.Printf("Unable to push %s to %s \n", gif, f.String())
+	}
+	log.Println("Save to Firebase successful !")
+}
+
+func UpdateToFirebase(f *firego.Firebase, gif interface{}) {
+	err := f.Set(gif)
+	if err != nil {
+		log.Printf("Unable to update value %s to %s \n", gif, f.String())
 	}
 
-	var bar string
-	if err := pushedFirego.Value(&bar); err != nil {
-		log.Fatal(err)
-	}
 	log.Println("Save to Firebase successful !")
 }

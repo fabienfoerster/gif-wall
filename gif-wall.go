@@ -32,7 +32,9 @@ func main() {
 	}
 
 	//set up firebase connection
-	f := firego.New("https://gif-wall.firebaseio.com/gif_list")
+	f := firego.New("https://gif-wall.firebaseio.com/")
+	gifListRef := f.Child("gif_list")
+	lastGifRef := f.Child("last_gif")
 	log.Println("Connected to Firebase ...")
 	//set up twitter api
 	anaconda.SetConsumerKey(twitterAPIKey)
@@ -48,13 +50,15 @@ func main() {
 		switch tw := t.(type) {
 		case anaconda.Tweet:
 			log.Printf("New tweet : https://twitter.com/%s/status/%s", tw.User.ScreenName, tw.IdStr)
-			if url := extractGIFFromMediaTwitter(tw); url != "" {
-				saveToFirese(f, url)
-			}
-			/*if url := extractGIFFromLinkTwitter(tweet); url != "" {
-				saveToFirese(f, url)
+			if gif := extractGIFFromMediaTwitter(tw); (gif != GIF{}) {
+				PushToFirebase(gifListRef, gif)
+				UpdateToFirebase(lastGifRef, gif)
 				continue
-			}*/
+			}
+			if gif := extractGIFFromLinkTwitter(tw); (gif != GIF{}) {
+				PushToFirebase(gifListRef, gif)
+				UpdateToFirebase(lastGifRef, gif)
+			}
 		}
 
 	}
