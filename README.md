@@ -2,7 +2,7 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-##Description
+## Description
 The program is decomposed in three parts.
 
 #### 1 - The GO Twitter Stream Crawler Thingy Backend
@@ -27,7 +27,7 @@ go install
 # run the binary
 $GOPATH/bin/gif-wall
 ```
-##Environment variables
+## Environment variables
 The app use the twitter API so you'll need to set 5 environment variables
 ```
 heroku config:set TWITTER_API_KEY=XXX
